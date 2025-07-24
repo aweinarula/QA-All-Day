@@ -5,6 +5,40 @@
   <!-- Created using Storyline 360 x64 - http://www.articulate.com  -->
   <!-- version: 3.101.34961.0 -->
   <title>QA All Day Game</title>
+  <script>
+  // Fake LMS API object to simulate SCORM
+  window.API = {
+    LMSInitialize: () => "true",
+    LMSFinish: () => "true",
+    LMSGetValue: (key) => "",
+
+    LMSSetValue: (key, value) => {
+      console.log("SCORM Set", key, value);
+
+      // Track completion event
+      if (key === "cmi.core.lesson_status" && value === "completed") {
+        // Send data to Power Automate
+        fetch("YOUR_POWER_AUTOMATE_WEBHOOK_URL", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            user: "user@email.com",  // Optional: dynamically detect user
+            course: "QA All Day SCORM",
+            status: value,
+            timestamp: new Date().toISOString()
+          })
+        });
+      }
+
+      return "true";
+    },
+
+    LMSCommit: () => "true",
+    LMSGetLastError: () => "0",
+    LMSGetErrorString: () => "No error",
+    LMSGetDiagnostic: () => ""
+  };
+</script>
   <meta http-equiv="x-ua-compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui"/>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
