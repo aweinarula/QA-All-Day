@@ -56,7 +56,7 @@ window.Script4 = function()
 {
   var player = GetPlayer();
   var score = player.GetVar("total");
-  var userName = player.GetVar("UserName");    // Make sure the variable name matches yours
+  var UserName = player.GetVar("UserName");    // Make sure the variable name matches yours
   var totalTime = player.GetVar("TotalTime");
 
 
@@ -73,7 +73,7 @@ if (typeof SCORM_CallLMSSetValue === "function") {
   fetch("https://script.google.com/macros/s/AKfycbyzS0jjprSCqAf5fftyfpyJ8TJjoT78vEvSl9wP0XyDMUDTP04XgRXplX5lLAYUkcVP/exec", {
     method: "POST",
     body: JSON.stringify({
-      UserName: userName,
+      UserName: UserName,
       total: score,
       TotalTime: totalTime
     }),
