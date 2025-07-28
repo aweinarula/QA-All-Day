@@ -85,7 +85,5 @@ if (typeof SCORM_CallLMSSetValue === "function") {
   .then(data => console.log("Google Script response:", data))
   .catch(error => console.error("Error sending data:", error));
 };
-  
-}
 
 };
