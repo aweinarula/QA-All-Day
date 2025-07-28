@@ -70,7 +70,7 @@ if (typeof SCORM_CallLMSSetValue === "function") {
 }
 
 // Now send data to Google Sheets via Web App URL
-  fetch("https://script.google.com/macros/s/AKfycbyzS0jjprSCqAf5fftyfpyJ8TJjoT78vEvSl9wP0XyDMUDTP04XgRXplX5lLAYUkcVP/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbwLr5Yjs9nQUKTd7WQ3SOBvvD192F32yDXENJ4ulRBp5h1XTorMqGxsC41YALoYcriBhA/exec", {
     method: "POST",
     body: JSON.stringify({
       UserName: UserName,
