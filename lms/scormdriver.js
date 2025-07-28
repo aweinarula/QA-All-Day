@@ -2023,21 +2023,6 @@ function SCORM2004_SetScore(intScore, intMaxScore, intMinScore){
 
     WriteToDebug("In SCORM2004_SetScore intScore=" + intScore + ", intMaxScore=" + intMaxScore + ", intMinScore=" + intMinScore);
 
-    //  SEND TO YOUR ENDPOINT
-    fetch("https://script.google.com/macros/s/AKfycbwRy23-Kap2DO8Wc-f-Sln7vpc8KB9lzeXkMRCD9JSWDJ_Ezv9Rl8fu4y0_-OuQpKW4/exec", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        score: intScore,
-        max: intMaxScore,
-        min: intMinScore
-      })
-    });
-
-	// restart standard code
-	
     SCORM2004_ClearErrorInfo();
 
     fltNormalizedScore = RoundToPrecision(intScore / 100, 7);
