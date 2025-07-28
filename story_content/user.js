@@ -1,3 +1,4 @@
+
 window.InitUserScripts = function()
 {
 var player = GetPlayer();
@@ -54,7 +55,10 @@ player.SetVar("TotalTime", timeString);
 window.Script4 = function()
 {
   var player = GetPlayer();
-var score = player.GetVar("total");
+  var score = player.GetVar("total");
+  var userName = player.GetVar("UserName");    // Make sure the variable name matches yours
+  var totalTime = player.GetVar("TotalTime");
+
 
 // Send score to LMS (SCORM 1.2 format)
 if (typeof SCORM_CallLMSSetValue === "function") {
@@ -65,6 +69,23 @@ if (typeof SCORM_CallLMSSetValue === "function") {
    SCORM_CallLMSCommit();
 }
 
+// Now send data to Google Sheets via Web App URL
+  fetch("https://script.google.com/macros/s/AKfycbyzS0jjprSCqAf5fftyfpyJ8TJjoT78vEvSl9wP0XyDMUDTP04XgRXplX5lLAYUkcVP/exec", {
+    method: "POST",
+    body: JSON.stringify({
+      UserName: userName,
+      total: score,
+      TotalTime: totalTime
+    }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(response => response.json())
+  .then(data => console.log("Google Script response:", data))
+  .catch(error => console.error("Error sending data:", error));
+};
+  
 }
 
 };
