@@ -86,4 +86,4 @@ if (typeof SCORM_CallLMSSetValue === "function") {
   .catch(error => console.error("Error sending data:", error));
 };
 
-};
+}
