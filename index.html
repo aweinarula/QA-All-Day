@@ -507,6 +507,42 @@
   
 
   <link rel="stylesheet" href="html5/data/css/output.min.css" data-noprefix/>
+
+  <script>
+  window.addEventListener('load', function () {
+    const username = prompt("Enter your name for the leaderboard:");
+
+    // This assumes you created a Storyline variable named "Score"
+    const checkScore = setInterval(() => {
+      try {
+        const player = window.GetPlayer(); // Storyline's global object
+        const score = player.GetVar("Score");
+
+        if (typeof score !== 'undefined') {
+          clearInterval(checkScore);
+          sendData(username, score);
+        }
+      } catch (e) {
+        console.log("Waiting for Storyline player...");
+      }
+    }, 1000);
+
+    function sendData(name, score) {
+      fetch("https://script.google.com/macros/s/AKfycbyNh_sOy8Rp5dFpphvAZRGsYeXdknNmJJURnR65kMDTng-dssb9-epJiAg4PiJtfGnVyg/exec", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, score })
+      })
+      .then(res => res.text())
+      .then(res => console.log("✅ Data sent:", res))
+      .catch(err => console.error("❌ Error sending data:", err));
+    }
+  });
+  </script>
+  
+
+
 </body>
 <script src="html5/lib/scripts/bootstrapper.min.js"></script>
 </html>
+
