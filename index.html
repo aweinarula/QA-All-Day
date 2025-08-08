@@ -528,10 +528,13 @@
     }, 1000);
 
     function sendData(name, score) {
-      fetch("https://script.google.com/macros/s/AKfycby45hf236blPJF5WWjVe5zA93Z0XNBaZYF2baHQVkRw2h2pvMMGbIyAg-VgN3gVgVfK2Q/exec", {
+      const formData = new URLSearchParams();
+      formData.append("name", name);
+      formData.append("score", score);
+      
+      fetch("https://script.google.com/macros/s/AKfycbzhF75KE7vMrMeDCe9APAhSD2bNaxWnomJY-Hzl4pmTIixWb1rbStlOmnwDEmIwdH7xlw/exec", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, score })
+        body: formData
       })
       .then(res => res.text())
       .then(res => console.log("✅ Data sent:", res))
@@ -545,6 +548,7 @@
 </body>
 <script src="html5/lib/scripts/bootstrapper.min.js"></script>
 </html>
+
 
 
 
