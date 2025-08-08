@@ -502,20 +502,19 @@
     if (window.autoSpider && window.vInterfaceObject) {
       document.querySelector('.mobile-load-title-overlay').style.display = 'none';
     }
-  </script>
+<script>
+  if (window.autoSpider && window.vInterfaceObject) {
+    document.querySelector('.mobile-load-title-overlay').style.display = 'none';
+  }
+</script>
 
-  
-
-  <link rel="stylesheet" href="html5/data/css/output.min.css" data-noprefix/>
-
-  <script>
+<script>
   window.addEventListener('load', function () {
     const username = prompt("Enter your name for the leaderboard:");
 
-    // This assumes you created a Storyline variable named "Score"
     const checkScore = setInterval(() => {
       try {
-        const player = window.GetPlayer(); // Storyline's global object
+        const player = window.GetPlayer();
         const score = player.GetVar("Score");
 
         if (typeof score !== 'undefined') {
@@ -531,23 +530,22 @@
       const formData = new URLSearchParams();
       formData.append("name", name);
       formData.append("score", score);
-      
+
       fetch("https://script.google.com/macros/s/AKfycbwvmjUDb8f9uaV__vNGA_ivd6u6-2_oiQmXlYZrJXJHuO2e25weTKVEED_ifCPEL6LLKw/exec", {
         method: "POST",
         body: formData,
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
-
       })
-
       .then(res => res.text())
       .then(res => console.log("✅ Data sent:", res))
       .catch(err => console.error("❌ Error sending data:", err));
     }
   });
-  </script>
+</script>
 </body>
   <script src="html5/lib/scripts/bootstrapper.min.js"></script>
 </html>
+
 
 
 
